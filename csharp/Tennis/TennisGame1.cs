@@ -21,61 +21,46 @@ namespace Tennis
                 m_score2 += 1;
         }
 
+        private static string GetScoreDescribtion(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                default:
+                    return "Forty";
+            }
+        }
+
         public string GetScore()
         {
             string score = "";
-            var tempScore = 0;
-            if (m_score1 == m_score2)
-            {
-                switch (m_score1)
-                {
-                    case 0:
-                        score = "Love-All";
-                        break;
-                    case 1:
-                        score = "Fifteen-All";
-                        break;
-                    case 2:
-                        score = "Thirty-All";
-                        break;
-                    default:
-                        score = "Deuce";
-                        break;
 
-                }
-            }
-            else if (m_score1 >= 4 || m_score2 >= 4)
+            if (m_score1 >= 4 || m_score2 >= 4)
             {
-                var minusResult = m_score1 - m_score2;
-                if (minusResult == 1) score = "Advantage " + player1Name;
-                else if (minusResult == -1) score = "Advantage " + player2Name;
-                else if (minusResult >= 2) score = "Win for " + player1Name;
-                else score = "Win for " + player2Name;
+                if (System.Math.Abs(m_score1 - m_score2) == 1)
+                    score = "Advantage ";
+                else
+                    score = "Win for ";
+                if (m_score1 > m_score2)
+                    return score + player1Name;
+                if (m_score1 < m_score2)
+                    return score + player2Name;
             }
-            else
-            {
-                for (var i = 1; i < 3; i++)
-                {
-                    if (i == 1) tempScore = m_score1;
-                    else { score += "-"; tempScore = m_score2; }
-                    switch (tempScore)
-                    {
-                        case 0:
-                            score += "Love";
-                            break;
-                        case 1:
-                            score += "Fifteen";
-                            break;
-                        case 2:
-                            score += "Thirty";
-                            break;
-                        case 3:
-                            score += "Forty";
-                            break;
-                    }
-                }
-            }
-            return score;
+
+            score += GetScoreDescribtion(m_score1) + "-";
+    
+            if (m_score1 != m_score2)
+                return score + GetScoreDescribtion(m_score2);
+
+            if (m_score1 < 3)
+                return score + "All";
+
+            return "Deuce";
         }
     }
 }
