@@ -2,38 +2,38 @@ namespace Tennis
 {
     public class TennisGame3 : ITennisGame
     {
-        private int p1;
-        private int p2;
-        private string p1N;
-        private string p2N;
+        private int player1Score;
+        private int player2Score;
+        private string player1Name;
+        private string player2Name;
 
         public TennisGame3(string player1Name, string player2Name)
         {
-            p1N = player1Name;
-            p2N = player2Name;
+            this.player1Name = player1Name;
+            this.player2Name = player2Name;
         }
 
         public string GetScore()
         {
             string s;
-            if (p1 < 4 && p2 < 4 && !(p1 == 3 && p2 == 3))
+            if (player1Score < 4 && player2Score < 4 && !(player1Score == 3 && player2Score == 3))
             {
-                string[] p = { "Love", "Fifteen", "Thirty", "Forty" };
-                s = p[p1];
-                return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+                string[] scores = { "Love", "Fifteen", "Thirty", "Forty" };
+                s = scores[player1Score];
+                return (player1Score == player2Score) ? s + "-All" : s + "-" + scores[player2Score];
             }
-            if (p1 == p2)
+            if (player1Score == player2Score)
                 return "Deuce";
-            s = p1 > p2 ? p1N : p2N;
-            return (System.Math.Abs(p1 - p2) == 1) ? "Advantage " + s : "Win for " + s;
+            s = player1Score > player2Score ? player1Name : player2Name;
+            return (System.Math.Abs(player1Score - player2Score) >= 2) ? "Win for " + s : "Advantage " + s;
         }
 
         public void WonPoint(string playerName)
         {
-            if (playerName == p1N)
-                p1 += 1;
-            if (playerName == p2N)
-                p2 += 1;
+            if (playerName == player1Name)
+                player1Score += 1;
+            if (playerName == player2Name)
+                player2Score += 1;
         }
 
     }
