@@ -13,21 +13,26 @@ namespace Tennis
             this.player2Name = player2Name;
         }
 
+        private static string GetScoreDescribtion(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "Fifteen";
+                case 2:
+                    return "Thirty";
+                default:
+                    return "Forty";
+            }
+        }
+
         public string GetScore()
         {
-            string p1res = "";
-            string p2res = "";
-            string score = "";
-
             if (p1point == p2point && p1point < 3)
             {
-                if (p1point == 0)
-                    score = "Love";
-                if (p1point == 1)
-                    score = "Fifteen";
-                if (p1point == 2)
-                    score = "Thirty";
-                return score + "-All";
+                return GetScoreDescribtion(p1point) + "-All";
             }
 
             if (p1point == p2point)
@@ -51,25 +56,7 @@ namespace Tennis
                 return "Advantage " + player2Name;
             }
 
-            if (p1point == 0)
-                p1res = "Love";
-            if (p1point == 1)
-                p1res = "Fifteen";
-            if (p1point == 2)
-                p1res = "Thirty";
-            if (p1point == 3)
-                p1res = "Forty";
-
-            if (p2point == 0)
-                p2res = "Love";
-            if (p2point == 1)
-                p2res = "Fifteen";
-            if (p2point == 2)
-                p2res = "Thirty";
-            if (p2point == 3)
-                p2res = "Forty";
-
-            return score = p1res + "-" + p2res;
+            return GetScoreDescribtion(p1point) + "-" + GetScoreDescribtion(p2point);
         }
 
         private void P1Score()
