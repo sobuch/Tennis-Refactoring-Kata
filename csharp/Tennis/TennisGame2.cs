@@ -4,9 +4,6 @@ namespace Tennis
     {
         private int p1point = 0;
         private int p2point = 0;
-
-        private string p1res = "";
-        private string p2res = "";
         private string player1Name;
         private string player2Name;
 
@@ -18,7 +15,9 @@ namespace Tennis
 
         public string GetScore()
         {
-            var score = "";
+            string p1res = "";
+            string p2res = "";
+            string score = "";
             if (p1point == p2point && p1point < 3)
             {
                 if (p1point == 0)
@@ -27,10 +26,10 @@ namespace Tennis
                     score = "Fifteen";
                 if (p1point == 2)
                     score = "Thirty";
-                score += "-All";
+                return score + "-All";
             }
-            if (p1point == p2point && p1point > 2)
-                score = "Deuce";
+            if (p1point == p2point)
+                return "Deuce";
 
             if (p1point > 0 && p2point == 0)
             {
